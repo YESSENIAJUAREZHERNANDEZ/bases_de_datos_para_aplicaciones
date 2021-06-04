@@ -1,0 +1,62 @@
+ALTER TABLE direcciones 
+ADD no_exterior VARCHAR(5) NOT NULL DEFAULT 0;
+ALTER TABLE direcciones 
+ADD no_interior VARCHAR(5) NOT NULL DEFAULT 0;
+
+
+
+CREATE TABLE IF NOT EXISTS proveedores (
+id_proveedor INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+proveedor VARCHAR(60) NOT NULL , 
+nombre_contacto VARCHAR(60) NOT NULL , 
+telefono_contacto INTEGER(10) NOT NULL , 
+email_contacto VARCHAR(60) NOT NULL , 
+fecha_actualizacion TIMESTAMP NOT NULL 
+);
+
+
+INSERT INTO proveedores (id_proveedor,proveedor,nombre_contacto,telefono_contacto,email_contacto,fecha_actualizacion) VALUES ("98312","Jefferson","Clio","404969276","mattis@diam.edu","2022-02-01 10:22:05");
+INSERT INTO proveedores (id_proveedor,proveedor,nombre_contacto,telefono_contacto,email_contacto,fecha_actualizacion) VALUES ("89901","Oneill","Debra","716996988","ipsum.leo@adipiscingnonluctus.net","2022-01-11 03:37:35");
+INSERT INTO proveedores (id_proveedor,proveedor,nombre_contacto,telefono_contacto,email_contacto,fecha_actualizacion) VALUES ("98020","Compton","Ava","434474706","tincidunt.pede.ac@gravidanon.com","2021-03-01 14:08:34");
+INSERT INTO proveedores (id_proveedor,proveedor,nombre_contacto,telefono_contacto,email_contacto,fecha_actualizacion) VALUES ("39654","Cox","Claire","471941617","In.tincidunt@diamat.net","2021-11-05 17:07:10");
+INSERT INTO proveedores (id_proveedor,proveedor,nombre_contacto,telefono_contacto,email_contacto,fecha_actualizacion) VALUES ("08636","Hutchinson","Dana","138143550","Aliquam.adipiscing.lobortis@purus.ca","2021-04-07 21:22:50");
+
+CREATE TABLE IF NOT EXISTS direcciones_proveedores(
+id_direccion INTEGER NOT NULL,
+calle VARCHAR(60) NOT NULL , 
+colonia VARCHAR(60) NOT NULL , 
+cp INTEGER(6) NOT NULL , 
+municipio VARCHAR(60) NOT NULL ,
+estado VARCHAR(60) NOT NULL ,
+pais VARCHAR(60) NOT NULL ,
+no_exterior VARCHAR(5) NOT NULL ,
+no_interior VARCHAR(5) NOT NULL ,
+fecha_actualizacion TIMESTAMP NOT NULL,
+id_proveedor INTEGER NOT NULL,
+FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor)
+);
+ 
+Insertar 10 registros, asignando 2 direcciones por cliente.
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("39176","Leilani","Reagan","0017","Rollins","Cour-sur-Heure","Honduras",0,0,"2020-12-11 21:09:17","8636");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("69722","Cleo","Margaret","2301","Ellis","Oldenzaal","Azerbaijan",0,0,"2020-06-27 19:36:02","39654");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("28372","Daria","Kylynn","6894","Haley","Kerikeri","Mauritania",0,0,"2020-10-12 17:49:31","89901");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("70398","Hiram","Tashya","6554","Suarez","Campbeltown","Belize",0,0,"2022-04-08 05:02:29","98020");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("38006","Mufutau","Rosalyn","5527","Horne","Langenhagen","Papua New Guinea",0,0,"2021-01-22 20:36:18","98312");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("67366","Yardley","Rebecca","8930","Wynn","Pichidegua","Sri Lanka",0,0,"2022-04-05 11:11:36","7890");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("17987","Rosalyn","Briar","1232","Sloan","Fort Collins","Bangladesh",0,0,"2021-02-20 11:28:16","67545");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("47863","Declan","Ila","2620","Payne","Ganshoren","Samoa",0,0,"2021-10-13 11:03:41","09092");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("04441","Jeanette","Isadora","4791","Benson","Ways","Virgin Islands, United States",0,0,"2021-02-28 01:02:32","16017");
+INSERT INTO direcciones_proveedores (id_direccion,calle,colonia,cp,municipio,estado,pais,no_exterior,no_interior,fecha_actualizacion,id_proveedor) VALUES ("21518","Judith","April","9819","Munoz","Sassocorvaro","Lebanon",0,0,"2021-12-19 09:20:36","03108");
+
+ 
+ 
+INSERT INTO clientes (id_cliente,nombre,primer_apellido,segundo_apellido,telefono,email,fecha_actualizacion,id_direccion) VALUES ("034679","Gotta","Goes","Myui","725844764","wheein.color@volutpat.com","2021-07-10 04:03:46","4565");
+INSERT INTO clientes (id_cliente,nombre,primer_apellido,segundo_apellido,telefono,email,fecha_actualizacion,id_direccion) VALUES ("078541","Shine","Pent","Agon","715044764","hwasa.color@volutpat.com","2022-11-10 04:43:46","0945");
+ 
+4. Crear una relación entre las tablas proveedores y direcciones_proveedor.
+CREATE VIEW direcciones_proveedores_proveedores AS 
+SELECT proveedores.proveedor, proveedores.nombre_contacto, proveedores.telefono_contacto, proveedores.email_contacto,direcciones_proveedores.calle, direcciones_proveedores.colonia, direcciones_proveedores.cp, direcciones_proveedores.municipio, direcciones_proveedores.estado, direcciones_proveedores.pais, direcciones_proveedores.no_exterior, direcciones_proveedores.no_interior
+FROM proveedores,direcciones_proveedores
+WHERE direcciones_proveedores.id_proveedor = proveedores.id_proveedor;
+ 
+5. Crear una vista de nombre proveedores_direcciones_proveedores que muestre todos los campos de ambas tablas.
