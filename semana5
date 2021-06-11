@@ -1,0 +1,28 @@
+
+CREATE TABLE IF NOT EXISTS ventas (
+id_venta INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+fecha_venta TIMESTAMP NOT NULL,
+total_venta INTEGER(20) NOT NULL ,
+id_cliente INTEGER NOT NULL,
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+);
+
+
+CREATE TABLE IF NOT EXISTS detalle_ventas (
+id_detalle_venta INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id_venta INTEGER NOT NULL,
+cantidad_producto INTEGER(10) NOT NULL ,
+precio INTEGER(10) NOT NULL ,
+total_x_producto INTEGER(10) NOT NULL ,
+FOREIGN KEY (id_venta) REFERENCES ventas(id_venta),
+id_producto INTEGER NOT NULL,
+FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("77800","2020-06-13 05:33:40","2800","01924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("70011","2020-06-01 08:30:40","1560","2027");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("67840","2020-04-21 12:45:10","5960","1924");
+
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,total_x_producto,id_producto) VALUES ("13101","67840","540","250","40200","787");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,total_x_producto,id_producto) VALUES ("40022","70011","89","150","2000","860");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,total_x_producto,id_producto) VALUES ("23240","67840","490","50","67000","550");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,total_x_producto,id_producto) VALUES ("76379","77800","956","178","10000","985");
