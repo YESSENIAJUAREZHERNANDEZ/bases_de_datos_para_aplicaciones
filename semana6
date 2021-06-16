@@ -1,0 +1,39 @@
+1. Truncar las tablas de ventas y detalle_ventas.
+TRUNCATE TABLE detalle_ventas;
+TRUNCATE TABLE ventas;
+
+ 
+2. Insertar 10 ventas para 3 clientes diferentes.
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("27800","2020-06-13 05:33:40","2800","01924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("10011","2020-06-01 08:30:40","1560","2027");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("67840","2020-04-21 12:45:10","5960","1924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("73177","2021-03-21 16:36:00","57435","01924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("90531","2021-04-15 19:35:26","11898","01924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("05115","2021-03-27 20:07:19","6809","2027");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("64132","2022-01-05 18:02:52","20966","2027");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("22677","2020-09-06 11:05:57","442","01924");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("69347","2020-10-13 21:56:10","51","2027");
+INSERT INTO ventas (id_venta,fecha_venta,total_venta,id_cliente) VALUES ("75078","2020-12-31 16:38:30","72017","1924");
+ 
+ 
+3. En cada venta agregar de 2 a 3 productos diferentes.
+Antes de realizar este punto, se modificó el campo “total_x_producto” para que este multiplicara la cantidad y el precio del producto
+ 
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("13101","22677","50","10","680");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("51403","27800","01","457","727");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("30435","73177","15","286","890");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("47818","90531","39","5","555");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("05632","69347","03","603","900");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("88747","10011","34","12","230");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("62683","05115","33","126","458");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("58930","64132","01","200","673");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("23960","67840","16","642","987");
+INSERT INTO detalle_ventas (id_detalle_venta,id_venta,cantidad_producto,precio,id_producto) VALUES ("62445","75078","09","352","356");
+
+ 
+ 
+4. Realizar una consulta que muestre el nombre completo del cliente con la mayor venta realizada.
+SELECT clientes.nombre,clientes.primer_apellido,clientes.segundo_apellido ,max(detalle_ventas.total_x_producto) AS maximo FROM clientes JOIN ventas ON clientes.id_cliente = ventas.id_cliente JOIN detalle_ventas on ventas.id_venta = detalle_ventas.id_venta;
+ 
+5. Realizar una consulta que muestre el nombre completo del cliente con la menor venta realizada.
+SELECT clientes.nombre,clientes.primer_apellido,clientes.segundo_apellido ,min(detalle_ventas.total_x_producto) AS minimo FROM clientes JOIN ventas ON clientes.id_cliente = ventas.id_cliente JOIN detalle_ventas on ventas.id_venta = detalle_ventas.id_venta;
