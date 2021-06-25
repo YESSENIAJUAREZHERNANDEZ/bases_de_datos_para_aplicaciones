@@ -1,0 +1,41 @@
+Consulta 1:
+select detalle_ventas.id_venta, sum(total_x_producto) as total_venta
+
+FROM detalle_ventas
+
+GROUP BY id_venta;
+
+Consulta 2:
+SELECT clientes.nombre, ventas.id_venta, sum(detalle_ventas.total_x_producto)  as  total_venta
+FROM clientes,ventas,detalle_ventas
+WHERE clientes.id_cliente=ventas.id_cliente
+AND ventas.id_venta=detalle_ventas.id_venta
+GROUP BY ventas.id_venta;
+
+Consulta 3:
+SELECT clientes.nombre, sum(detalle_ventas.total_x_producto)  as  total_venta
+FROM clientes,ventas,detalle_ventas
+WHERE clientes.id_cliente=ventas.id_cliente
+AND ventas.id_venta=detalle_ventas.id_venta
+GROUP BY clientes.id_cliente;
+
+Consulta 4:
+SELECT productos.producto, sum(detalle_ventas.cantidad_producto)  as  cantidad_producto
+FROM productos,detalle_ventas
+WHERE productos.id_producto=detalle_ventas.id_producto
+GROUP BY productos.id_producto;
+
+
+
+Consulta 5:
+SELECT ventas.fecha, sum(detalle_ventas.total_x_producto)  as  total_venta
+FROM ventas,detalle_ventas
+WHERE ventas.id_venta=detalle_ventas.id_venta
+GROUP BY ventas.fecha;
+
+Consulta 6:
+select ventas.fecha, min(total_x_producto) as total_venta
+FROM detalle_ventas,ventas
+GROUP BY ventas.fecha;
+
+
