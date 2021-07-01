@@ -1,0 +1,45 @@
+Consulta 7:
+SELECT proveedores.id_proveedor, proveedores.proveedor, proveedores.nombre_contacto, proveedores.email_contacto, compras.fecha, compras.id_compra, productos.id_producto, productos.producto, detalle_compras.cantidad_producto,detalle_compras.precio_unitario,detalle_compras.total_x_producto
+FROM proveedores,compras, productos,detalle_compras
+WHERE proveedores.id_proveedor = compras.id_proveedor AND
+detalle_compras.id_compra = compras.id_compra AND
+productos.id_producto = detalle_compras.id_producto;
+
+Consulta 8:
+select detalle_compras.id_compra, sum(total_x_producto) as total_compras
+FROM detalle_compras
+GROUP BY id_compra;
+
+Consulta 9:
+SELECT proveedores.proveedor, proveedores.nombre_contacto,proveedores.email_contacto, compras.id_compra, sum(total_x_producto) as total_compra
+FROM proveedores,compras, detalle_compras
+WHERE proveedores.id_proveedor=compras.id_proveedor
+AND compras.id_compra=detalle_compras.id_compra
+GROUP BY compras.id_compra;
+
+Consulta 10:
+SELECT proveedores.proveedor,  sum(total_x_producto) as total_compra
+FROM proveedores,compras, detalle_compras
+WHERE proveedores.id_proveedor=compras.id_proveedor
+AND compras.id_compra=detalle_compras.id_compra
+GROUP BY proveedores.id_proveedor;
+
+Consulta 11:
+SELECT productos.producto, sum(cantidad_producto) as cantidad_producto
+FROM productos, detalle_compras
+WHERE productos.id_producto=detalle_compras.id_producto
+GROUP BY productos.id_producto;
+
+Consulta 12:
+SELECT compras.fecha, sum(detalle_compras.total_x_producto)  as  total_compra
+FROM compras,detalle_compras
+WHERE compras.id_compra=detalle_compras.id_compra 
+GROUP BY compras.fecha; 
+
+Consulta 13:
+SELECT compras.fecha, sum(detalle_compras.total_x_producto)  as  total_compra
+FROM compras,detalle_compras
+WHERE compras.id_compra=detalle_compras.id_compra 
+GROUP BY compras.fecha
+order by total_compra desc LIMIT 1; 
+
